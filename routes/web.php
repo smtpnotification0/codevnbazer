@@ -69,6 +69,7 @@ Route::middleware(AuthUser::class)->group(function(){
   Route::get('payment/cancel', [PaymentController::class, 'payment_cancel'])->name('cancel.payment'); // General Cancel Callback
     
   // Order Routes
+  Route::get('order/success/{order}', [OrdersController::class, 'success'])->name('order.success'); // Order Success Page
   Route::get('payment/success', [OrdersController::class, 'paymentSuccess'])->name('payment.success'); // Order Success/Verification Callback
   Route::post('topup/buynow', [OrdersController::class, 'buynow'])->name('topup.buynow'); // Initiate Order
     

@@ -4,14 +4,15 @@ namespace App\Constants;
 
 class OrderStatus
 {
-    // order status
-    public const CANCEL = 'cancel';
-    public const COMPLETE = 'complete';
-    public const PROCESSING = 'processing';
-    public const AUTOPROCESSING = 'auto-processing';
+    public const CANCEL          = 'cancel';
+    public const COMPLETED       = 'completed';
+    public const PENDING         = 'pending';
+    public const PROCESSING      = 'processing';
+    public const AUTOPROCESSING  = 'auto-processing';
 
     public const ORDERLIST = [
-        self::COMPLETE,
+        self::COMPLETED,
+        self::PENDING,
         self::PROCESSING,
         self::AUTOPROCESSING,
         self::CANCEL,
@@ -19,36 +20,36 @@ class OrderStatus
 
     public static function options(): array
     {
-        $data = [
-            self::COMPLETE   => 'complete',
-            self::PROCESSING => 'processing',
-            self::CANCEL      => 'cancel',
+        return [
+            self::PENDING        => 'Pending',
+            self::PROCESSING     => 'Processing',
+            self::AUTOPROCESSING => 'Auto Processing',
+            self::COMPLETED      => 'Completed',
+            self::CANCEL         => 'Cancel',
         ];
-
-     /*   if (gs()->enable_auto) {
-            $data[self::AUTOPROCESSING] = 'Auto Processing';
-        }*/
-
-        return $data;
     }
 
     public static function color($status): string
     {
         return match ($status) {
-            self::COMPLETE => 'text-success',
-            self::PROCESSING => 'text-primary',
+            self::COMPLETED      => 'text-success',
+            self::PROCESSING     => 'text-primary',
             self::AUTOPROCESSING => 'text-info',
-            self::CANCEL => 'text-danger',
+            self::PENDING        => 'text-warning',
+            self::CANCEL         => 'text-danger',
+            default              => 'text-secondary',
         };
     }
 
     public static function adminColor($status): string
     {
         return match ($status) {
-            self::COMPLETE => 'success',
-            self::PROCESSING => 'info',
+            self::COMPLETED      => 'success',
+            self::PROCESSING     => 'info',
             self::AUTOPROCESSING => 'gray',
-            self::CANCEL => 'danger',
+            self::PENDING        => 'warning',
+            self::CANCEL         => 'danger',
+            default              => 'gray',
         };
     }
 }
